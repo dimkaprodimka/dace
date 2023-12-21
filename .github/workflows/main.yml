@@ -33,10 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout argo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           repository: 'dimkaprodimka/argotest'
-          ref: 'main'
           token:  ${{ secrets.ACTIONS_GITHUB_TOKEN }}
 
       - name: Git status
