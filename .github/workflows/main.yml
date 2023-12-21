@@ -31,15 +31,15 @@ jobs:
         run: DIGEST=$(docker inspect dimkapro/dace:latest -f '{{.RepoDigests}}' | tr -d '[' | tr -d ']')
           
       - uses: actions/checkout@v3
-      with:
-        repository: ${{ secrets.G_REPO }}
-        ref: 'main'
-        token:  ${{ secrets.ACTIONS_GITHUB_TOKEN }}
-      - name: setup git config
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-      - run: sed "s|<image>|$DIGEST|" template.yaml > dev/deployment.yaml
-      - run: git add .
-      - run: git commit -m "bot update dev/deployment"
-      - run: git push origin main
+        with:
+          repository: ${{ secrets.G_REPO }}
+          ref: 'main'
+          token:  ${{ secrets.ACTIONS_GITHUB_TOKEN }}
+        - name: setup git config
+          run: |
+            git config user.name "GitHub Actions Bot"
+            git config user.email "<>"
+        - run: sed "s|<image>|$DIGEST|" template.yaml > dev/deployment.yaml
+        - run: git add .
+        - run: git commit -m "bot update dev/deployment"
+        - run: git push origin main
