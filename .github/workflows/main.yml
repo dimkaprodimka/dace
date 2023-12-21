@@ -52,5 +52,5 @@ jobs:
       - name: Commit and push
         run: |
           git add .
-          git commit -m "bot update dev/deployment"
+          git commit -m "bot update ${{ github.run_number }} dev/deployment.yaml"
           git push origin main
