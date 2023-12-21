@@ -26,11 +26,10 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.REPO_TAG }}
-      - name: save DIGEST
-        run: DIGEST=$(docker inspect dimkapro/dace:latest -f '{{.RepoDigests}}' | tr -d '[' | tr -d ']')
-      
+          tags: ${{ secrets.REPO_TAG }}-${{ github.run_number }}
+           
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout argo
@@ -41,12 +40,18 @@ jobs:
           token:  ${{ secrets.ACTIONS_GITHUB_TOKEN }}
 
       - name: Git status
-        run: git status
+        run: |
+          pwd
+          ls
+          git status
       - name: setup git config
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-      - run: sed "s|<image>|$DIGEST|" template.yaml > dev/deployment.yaml
-      - run: git add .
-      - run: git commit -m "bot update dev/deployment"
-      - run: git push origin main
+      - name: insert image-name to deployment.yaml
+        run: sed "s|<image>|${{ secrets.REPO_TAG }}-${{ github.run_number }}|" template.yaml > dev/deployment.yaml
+      - name: Commit and push
+        run: |
+          git add .
+          git commit -m "bot update dev/deployment"
+          git push origin main
