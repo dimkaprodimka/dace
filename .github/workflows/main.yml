@@ -29,12 +29,19 @@ jobs:
           tags: ${{ secrets.REPO_TAG }}
       - name: save DIGEST
         run: DIGEST=$(docker inspect dimkapro/dace:latest -f '{{.RepoDigests}}' | tr -d '[' | tr -d ']')
-          
-      - uses: actions/checkout@v4
+      
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout argo
+        uses: actions/checkout@v4
         with:
           repository: ${{ secrets.G_REPO }}
           ref: 'main'
           token:  ${{ secrets.ACTIONS_GITHUB_TOKEN }}
+
+      - name: Git status
+        run: git status
       - name: setup git config
         run: |
           git config user.name "GitHub Actions Bot"
