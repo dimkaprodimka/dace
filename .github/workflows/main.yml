@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-        run: sed "s|<image>|$DIGEST|" template.yaml > dev/deployment.yaml
-        run: git add .
-        run: git commit -m "bot update dev/deployment"
-        run: git push origin main
+      - run: sed "s|<image>|$DIGEST|" template.yaml > dev/deployment.yaml
+      - run: git add .
+      - run: git commit -m "bot update dev/deployment"
+      - run: git push origin main
