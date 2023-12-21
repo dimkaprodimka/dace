@@ -1,6 +1,6 @@
 FROM python:3.8.18-slim
 
-ENV HTTP_PORT 6878
+ENV HTTP_PORT 8080
 
 WORKDIR /ace
 
