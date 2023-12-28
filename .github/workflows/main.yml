@@ -35,7 +35,7 @@ jobs:
       - name: Checkout argo
         uses: actions/checkout@v3
         with:
-          repository: "${{ secrets.G_REPO }}"
+          repository: 'dimkaprodimka/argotest'
           token:  ${{ secrets.ACTIONS_GITHUB_TOKEN }}
 
       - name: Git status
