@@ -10,5 +10,5 @@ RUN python3.8 -m pip install --upgrade pip && python3.8 -m pip install -r requir
 
 EXPOSE $HTTP_PORT
 
-ENTRYPOINT ./start-engine --client-console --live-cache-type memory --live-mem-cache-size 262144000  --bind-all --http-port $HTTP_PORT 
+ENTRYPOINT ./start-engine --client-console --live-cache-type memory --live-mem-cache-size 512000000  --bind-all --http-port $HTTP_PORT 
 
